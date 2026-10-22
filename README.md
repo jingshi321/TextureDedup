@@ -2,6 +2,10 @@
 
 TextureDedup 是一个本地运行的贴图查重工具，提供网页界面和 Windows 桌面封装。仓库只包含源码；缓存、模型、测试数据和打包后的 EXE 不纳入 Git。
 
+## Windows 版下载
+
+从 [GitHub Releases](https://github.com/jingshi321/TextureDedup/releases/latest) 下载 `TextureDedup.exe`，双击运行，无需安装 Python。支持 Windows 10/11 64 位，需要 Microsoft Edge WebView2 运行时。内置本地 AI 模型，优先使用 DirectML GPU，不可用时回退 CPU。缓存保存在 Windows 临时目录，正常关闭后清除本次缓存。发行页面同时提供 SHA256 校验文件。
+
 ## 从源码运行
 
 需要 Python 3.10 或更新版本。安装核心依赖后运行 `启动贴图查重.cmd`：
@@ -11,7 +15,7 @@ py -3 -m pip install -r requirements.txt
 py -3 server.py
 ```
 
-本地 AI 检索需要运行 `py -3 setup_ai.py` 下载依赖和模型；首次运行需要联网。Windows 桌面 EXE 的构建还需要 WebView2 和 PyInstaller 相关依赖，生成文件输出到 `Windows版/`，构建缓存放在 `save/`。当前仓库不提供预编译 EXE。
+本地 AI 检索需要运行 `py -3 setup_ai.py` 下载依赖和模型；首次运行需要联网。Windows 桌面 EXE 的构建还需要 WebView2 和 PyInstaller 相关依赖，生成文件输出到 `Windows版/`，构建缓存放在 `save/`。预编译 EXE 在上述 Releases 页面下载。
 
 修复确认删除后文件未被回收的问题：扫描为加速而延后计算完整文件哈希时，清理会先核对扫描时的完整 RGBA 像素校验值，再补齐文件哈希，用于后续检查；文件发生变化仍拒绝执行。清理失败原因保留在确认窗口，执行过程中显示实际进度并禁止重复确认。确认窗口可按住标题拖动，位置限制在当前可见区域；进度同时覆盖文件核对和移入回收站，显示总百分比与已回收文件数。执行期间禁止另一次扫描、移动或清理，关闭软件会等待清理结束。
 
