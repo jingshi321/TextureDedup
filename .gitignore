@@ -1,0 +1,8 @@
+save/
+npm-cache/
+.playwright-cli/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+Windows版/*.exe
+Windows版/
